@@ -1,0 +1,26 @@
+.btn{
+  font-family: 'Poppins', sans-serif;
+  width: 80px;
+  height: 32px;
+  border: 2px solid #f1f4f8;
+  border-radius: 6px;
+  color: #3d4853;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn:hover, .btn:active, .btn:focus{
+  background: #f1f4f8;
+}
+
+.btnImg{
+  height: 15px;
+}
+
+:target{
+  background: #f1f4f8;
+}

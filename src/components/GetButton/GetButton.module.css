@@ -1,0 +1,17 @@
+.get{
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+  line-height: 3em;
+  border: 2px solid #f1f4f8;
+  border-radius: 6px;
+  color: #3d4853;
+  font-weight: 600;
+  background-color: #f1f4f8;
+  text-align: center;
+}
+
+.get:hover{
+  background-color: #3d4853;
+  color: white;
+  cursor: pointer;
+}

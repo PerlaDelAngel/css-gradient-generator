@@ -1,0 +1,16 @@
+.subtitles{
+  margin-top: 16px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3d4853;
+}
+
+.direction{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  justify-items: center;
+  column-gap: 8px;
+  row-gap: 8px;
+}

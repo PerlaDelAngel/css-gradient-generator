@@ -20,21 +20,3 @@ export const convertToRgb = (color) => {
     return color;
   }
 };
-
-//ie. rgba(140, 38, 3, 1.0)
-/* export function RGBAToHexA(rgba) {
-  const color = rgba.replace(/^rgba?\(|\s+|\)$/g, '').split(',');
-
-  let r = (parseInt(color[0], 10)).toString(16);
-  let g = (parseInt(color[1], 10)).toString(16);
-  let b = (parseInt(color[2], 10)).toString(16);
-
-  if (r.length === 1)
-    r = "0" + r;
-  if (g.length === 1)
-    g = "0" + g;
-  if (b.length === 1)
-    b = "0" + b;
-
-  return ("#" + r + g + b).toUpperCase();
-} */

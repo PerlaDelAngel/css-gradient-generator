@@ -15,7 +15,7 @@ import { randomColor, convertToRgb } from '../../utils/colors';
 
 export default function Sidebar() {
   const [type, setType] = useState('linear'); 
-  const [color1, setColor1] = useState(''); //store them in the values from the start
+  const [color1, setColor1] = useState(''); 
   const [color2, setColor2] = useState('');
 
   const [values, setValues] = useState({
@@ -23,23 +23,24 @@ export default function Sidebar() {
     direction: 'to bottom right',
     firstColor: '',
     secondColor: ''
-  })
-
-  /* setValues({
-    ...values,
-    firstColor: color1,
-    secondColor: color2
-  }) */
-
+  });
+  
   const randomizeColors = () => {
     setColor1(randomColor());
     setColor2(randomColor());
-
   };
 
   useEffect(() => {
     randomizeColors();
   }, []);
+
+  useEffect(() => {
+    setValues({
+      ...values,
+      firstColor: color1,
+      secondColor: color2
+    })
+  }, [color1, color2]);
 
   return (
     <section className={styles.sidebar}>
@@ -179,6 +180,7 @@ export default function Sidebar() {
           }}/>
 
       </div>
+
 
       <button className={`${styles.get} ${styles.getcss}`}>Get CSS</button>
 

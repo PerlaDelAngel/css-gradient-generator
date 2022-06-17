@@ -14,9 +14,7 @@ function hexToRGB(hex) {
 
 export const convertToRgb = (color) => {
   if(color.charAt(0) === '#'){
-    console.log(color)
     const rgb = hexToRGB(color);
-    console.log(rgb)
     return rgb;
   } else {
     return color;
@@ -24,7 +22,7 @@ export const convertToRgb = (color) => {
 };
 
 //ie. rgba(140, 38, 3, 1.0)
-export function RGBAToHexA(rgba) {
+/* export function RGBAToHexA(rgba) {
   const color = rgba.replace(/^rgba?\(|\s+|\)$/g, '').split(',');
 
   let r = (parseInt(color[0], 10)).toString(16);
@@ -39,4 +37,4 @@ export function RGBAToHexA(rgba) {
     b = "0" + b;
 
   return ("#" + r + g + b).toUpperCase();
-}
+} */

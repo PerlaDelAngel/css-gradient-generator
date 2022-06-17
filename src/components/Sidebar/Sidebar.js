@@ -14,33 +14,32 @@ import Footer from '../Footer/Footer';
 import { randomColor, convertToRgb } from '../../utils/colors';
 
 export default function Sidebar() {
-  const [type, setType] = useState('linear');
-  const [direction, setDirection] = useState(); //set default
-  const [color1, setColor1] = useState('');
+  const [type, setType] = useState('linear'); 
+  const [color1, setColor1] = useState(''); //store them in the values from the start
   const [color2, setColor2] = useState('');
 
   const [values, setValues] = useState({
-    gradType: type,
-    gradDirection: direction,
+    gradType: 'linear',
+    direction: 'to bottom right',
     firstColor: '',
     secondColor: ''
   })
 
-
+  /* setValues({
+    ...values,
+    firstColor: color1,
+    secondColor: color2
+  }) */
 
   const randomizeColors = () => {
     setColor1(randomColor());
     setColor2(randomColor());
+
   };
 
   useEffect(() => {
     randomizeColors();
   }, []);
-
-  useEffect(() => {
-    console.log(values)
-  }, [values])
-  
 
   return (
     <section className={styles.sidebar}>
@@ -49,8 +48,20 @@ export default function Sidebar() {
 
       <p className={styles.subtitles}>Style</p>
       <div className={styles.type}>
-        <Button text='Linear' handleClick={() => setType('linear')} />
-        <Button text='Radial' handleClick={() => setType('radial')} />
+        <Button text='Linear' handleClick={() => {
+          setType('linear');
+          setValues({
+            ...values,
+            gradType: 'linear',
+          })
+        }} />
+        <Button text='Radial' handleClick={() => {
+          setType('radial');
+          setValues({
+            ...values,
+            gradType: 'radial',
+          })
+        }} />
       </div>
 
 
@@ -59,46 +70,74 @@ export default function Sidebar() {
         <Button
           img={upLeft}
           alt='up left arrow'
-          handleClick={() => setDirection('to bottom right')} />
+          handleClick={() => setValues({
+            ...values, 
+            direction: 'to bottom right',
+          })}
+          />
 
         <Button
           img={up}
           alt='top arrow'
-          handleClick={() => setDirection('to bottom')} />
+          handleClick={() => setValues({
+            ...values, 
+            direction: 'to bottom',
+          })}/>
 
         <Button
           img={upRight}
           alt='up right arrow'
-          handleClick={() => setDirection('to bottom left')} />
+          handleClick={() => setValues({
+            ...values, 
+            direction: 'to bottom left',
+          })}/>
 
         <Button
           img={left}
           alt='left arrow'
-          handleClick={() => setDirection('to right')} />
+          handleClick={() => setValues({
+            ...values, 
+            direction: 'to right',
+          })}/>
 
         {type === 'radial' ?
-          <Button img={circle} alt='left arrow' handleClick={() => setDirection('ellipse at center')} /> :
+          <Button img={circle} alt='left arrow' handleClick={() => setValues({
+            ...values, 
+            direction: 'ellipse at center',
+          })} /> :
           <div />}
 
         <Button
           img={right}
           alt='right arrow'
-          handleClick={() => setDirection('to left')} />
+          handleClick={() => setValues({
+            ...values, 
+            direction: 'to left',
+          })}/>
 
         <Button
           img={downLeft}
           alt='down left arrow'
-          handleClick={() => setDirection('to top right')} />
+          handleClick={() => setValues({
+            ...values, 
+            direction: 'to top right',
+          })}/>
 
         <Button
           img={down}
           alt='down arrow'
-          handleClick={() => setDirection('to top')} />
+          handleClick={() => setValues({
+            ...values, 
+            direction: 'to top',
+          })}/>
 
         <Button
           img={downRight}
           alt='down right arrow'
-          handleClick={() => setDirection('to top left')} />
+          handleClick={() => setValues({
+            ...values, 
+            direction: 'to top left',
+          })}/>
       </div>
 
 
@@ -122,10 +161,15 @@ export default function Sidebar() {
 
       <p className={styles.subtitles}>Output format</p>
       <div className={styles.output}>
-        {/* THESE TWO BUTTONS have to save in values the color in the correct format
-        the default format is hex, so we would need to save it as is
-        for rgba we need to convert in order to save */}
-        <Button text='Hex' />
+
+        <Button text='Hex' handleClick={() => {
+          setValues({
+            ...values, 
+            firstColor: color1,
+            secondColor: color2
+          })
+          }}/>
+
         <Button text='Rgba' handleClick={() => {
           setValues({
             ...values, 
@@ -133,13 +177,12 @@ export default function Sidebar() {
             secondColor: convertToRgb(color2)
           })
           }}/>
-      </div>
 
+      </div>
 
       <button className={`${styles.get} ${styles.getcss}`}>Get CSS</button>
 
       <button className={`${styles.get} ${styles.share}`}>Get Share Link</button>
-
 
       <Footer />
     </section>

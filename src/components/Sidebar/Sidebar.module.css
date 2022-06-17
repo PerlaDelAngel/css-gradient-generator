@@ -65,28 +65,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 8px;
-}
-
-.get{
-  font-family: 'Poppins', sans-serif;
-  width: 100%;
-  line-height: 3em;
-  border: 2px solid #f1f4f8;
-  border-radius: 6px;
-  color: #3d4853;
-  font-weight: 600;
-  background-color: #f1f4f8;
-  text-align: center;
-}
-
-.get:hover{
-  background-color: #3d4853;
-  color: white;
-  cursor: pointer;
-}
-
-.getcss{
-  margin-top: 3em;
+  margin-bottom: 2.5em;
 }
 
 .share{

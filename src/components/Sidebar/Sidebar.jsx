@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Direction from '../Direction/Direction';
 import Footer from '../Footer/Footer';
 import { randomColor, hexToRGB } from '../../utils/colors';
+import GetButton from '../GetButton/GetButton';
 
 export default function Sidebar({values, setValues}) {
   const [type, setType] = useState('linear'); 
@@ -91,9 +92,8 @@ export default function Sidebar({values, setValues}) {
 
       </div>
 
-      <button className={`${styles.get} ${styles.getcss}`}>Get CSS</button>
-
-      <button className={`${styles.get} ${styles.share}`}>Get Share Link</button>
+      <GetButton text='Get CSS'/>
+      <GetButton text='Get Share Link' otherClass={styles.share}/>
 
       <Footer />
     </section>

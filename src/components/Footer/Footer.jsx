@@ -4,7 +4,7 @@ const styles = {
   lineHeight: '1.1875rem',
   position: 'fixed',
   display: 'block',
-  width: '320px',
+  width: '35%',
   bottom: '0',
   left: '0',
   padding: '30px 32px',

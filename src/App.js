@@ -10,14 +10,22 @@ function App() {
     secondColor: ''
   });
 
-  useEffect(() => {
+  /* useEffect(() => {
     console.log(values)
-  }, [values])
-  
+  }, [values]) */
+
+  const gradientType = `${values.gradType}-gradient(${values.direction},${values.firstColor}, ${values.secondColor})`
+  const styles = { 
+    gridArea: 'gradient',
+    height: '100vh',
+    background: gradientType
+  }  
 
   return (
-    <div className="App">
+    <div className='app'>
       <Sidebar values={values} setValues={setValues}/>
+
+      <div style={styles}/>
     </div>
   );
 }

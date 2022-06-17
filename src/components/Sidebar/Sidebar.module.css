@@ -32,15 +32,6 @@
   gap: 8px;
 }
 
-.direction{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  justify-items: center;
-  column-gap: 8px;
-  row-gap: 8px;
-}
-
 .colors{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

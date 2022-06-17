@@ -4,13 +4,24 @@ export function randomColor() {
 };
 
 //ie. #8C2603
-export function hexToRGB(hex) {
+function hexToRGB(hex) {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
   const b = parseInt(hex.slice(5, 7), 16);
 
   return "rgba(" + r + ", " + g + ", " + b + ", " + 1 + ")";
 }
+
+export const convertToRgb = (color) => {
+  if(color.charAt(0) === '#'){
+    console.log(color)
+    const rgb = hexToRGB(color);
+    console.log(rgb)
+    return rgb;
+  } else {
+    return color;
+  }
+};
 
 //ie. rgba(140, 38, 3, 1.0)
 export function RGBAToHexA(rgba) {

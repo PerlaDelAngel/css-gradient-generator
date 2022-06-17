@@ -11,7 +11,7 @@ import down from '../../assets/Down Arrow.png';
 import downRight from '../../assets/Down Right.png';
 import circle from '../../assets/Circle.png';
 import Footer from '../Footer/Footer';
-import { randomColor, hexToRGB } from '../../utils/colors';
+import { randomColor, convertToRgb } from '../../utils/colors';
 
 export default function Sidebar() {
   const [type, setType] = useState('linear');
@@ -26,6 +26,8 @@ export default function Sidebar() {
     secondColor: ''
   })
 
+
+
   const randomizeColors = () => {
     setColor1(randomColor());
     setColor2(randomColor());
@@ -35,6 +37,10 @@ export default function Sidebar() {
     randomizeColors();
   }, []);
 
+  useEffect(() => {
+    console.log(values)
+  }, [values])
+  
 
   return (
     <section className={styles.sidebar}>
@@ -116,11 +122,17 @@ export default function Sidebar() {
 
       <p className={styles.subtitles}>Output format</p>
       <div className={styles.output}>
-        {/* THESE TWO BUTTONS HAVE TO KNOW WHAT KIND OF NUMBER THEY RECEIVE, ie. rgb receives a 
-        string with # they convert to rgb. if hex receives a string starting with (rgb... 
-        convert to hex, THEY HAVE TO RECEIVE BOTH COLORS */}
+        {/* THESE TWO BUTTONS have to save in values the color in the correct format
+        the default format is hex, so we would need to save it as is
+        for rgba we need to convert in order to save */}
         <Button text='Hex' />
-        <Button text='Rgba' handleClick={() => hexToRGB(color1) }/>
+        <Button text='Rgba' handleClick={() => {
+          setValues({
+            ...values, 
+            firstColor: convertToRgb(color1),
+            secondColor: convertToRgb(color2)
+          })
+          }}/>
       </div>
 
 

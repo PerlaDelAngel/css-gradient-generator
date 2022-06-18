@@ -1,6 +1,7 @@
 import './App.css';
-import { useState/* , useEffect  */} from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
+import { linearToRadial, radialToLinear } from './utils/changeDirection';
 
 function App() {
   const [values, setValues] = useState({
@@ -10,15 +11,27 @@ function App() {
     secondColor: ''
   });
 
-  /* useEffect(() => {
-    console.log(values)
-  }, [values]) */
+  useEffect(() => {
+    if(values.gradType === 'radial'){
+      setValues({
+        ...values,
+        direction: linearToRadial(values)
+      })
+    };
 
-  let gradientCode = ''
+    if(values.gradType === 'linear'){
+      setValues({
+        ...values,
+        direction: radialToLinear(values)
+      })
+    };
+  }, [values.gradType])
+
+  let gradientCode = '';
 
   const gradientType = () => {
     if(values.gradType === 'linear'){ 
-      gradientCode = `${values.gradType}-gradient(${values.direction},${values.firstColor}, ${values.secondColor})`;
+      gradientCode = `${values.gradType}-gradient(${values.direction}, ${values.firstColor}, ${values.secondColor})`;
       return gradientCode;
     } else if (values.gradType === 'radial' && values.direction === 'ellipse at center'){
       gradientCode = `${values.gradType}-gradient(${values.direction}, ${values.firstColor}, ${values.secondColor})`;

@@ -102,7 +102,13 @@ export default function Sidebar({values, setValues, gradientCode}) {
 
       </div>
 
-      <GetButton text='Get CSS' handleClick={() => navigator.clipboard.writeText(fullGradientCode)} />
+      <GetButton text='Get CSS' handleClick={(e) => {
+        navigator.clipboard.writeText(fullGradientCode);
+        e.target.innerHTML = 'Yay! Copied to Clipboard!';
+        setTimeout(function(){
+          e.target.innerHTML = 'Get CSS';
+        }, 1000);
+      }} />
       <GetButton text='Get Share Link' otherClass={styles.share}/>
 
       <Footer />

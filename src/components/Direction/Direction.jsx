@@ -11,6 +11,7 @@ import downRight from '../../assets/Down Right.png';
 import circle from '../../assets/Circle.png';
 
 export default function Direction({ type, values, setValues }) {
+
   return (
     <section>
       <p className={styles.subtitles}>Direction</p>
@@ -20,7 +21,7 @@ export default function Direction({ type, values, setValues }) {
           alt='up left arrow'
           handleClick={() => setValues({
             ...values,
-            direction: 'to bottom right',
+            direction: type === 'linear' ? 'to bottom right' : 'left top',
           })}
         />
 
@@ -29,7 +30,7 @@ export default function Direction({ type, values, setValues }) {
           alt='top arrow'
           handleClick={() => setValues({
             ...values,
-            direction: 'to bottom',
+            direction: type === 'linear' ? 'to bottom' : 'center top',
           })} />
 
         <Button
@@ -37,7 +38,7 @@ export default function Direction({ type, values, setValues }) {
           alt='up right arrow'
           handleClick={() => setValues({
             ...values,
-            direction: 'to bottom left',
+            direction: type === 'linear' ? 'to bottom left' : 'right top',
           })} />
 
         <Button
@@ -45,7 +46,7 @@ export default function Direction({ type, values, setValues }) {
           alt='left arrow'
           handleClick={() => setValues({
             ...values,
-            direction: 'to right',
+            direction: type === 'linear' ? 'to right' : 'left center',
           })} />
 
         {type === 'radial' ?
@@ -60,7 +61,7 @@ export default function Direction({ type, values, setValues }) {
           alt='right arrow'
           handleClick={() => setValues({
             ...values,
-            direction: 'to left',
+            direction: type === 'linear' ? 'to left' : 'right center',
           })} />
 
         <Button
@@ -68,7 +69,7 @@ export default function Direction({ type, values, setValues }) {
           alt='down left arrow'
           handleClick={() => setValues({
             ...values,
-            direction: 'to top right',
+            direction: type === 'linear' ? 'to top right' : 'left bottom',
           })} />
 
         <Button
@@ -76,7 +77,7 @@ export default function Direction({ type, values, setValues }) {
           alt='down arrow'
           handleClick={() => setValues({
             ...values,
-            direction: 'to top',
+            direction: type === 'linear' ? 'to top' : 'center bottom',
           })} />
 
         <Button
@@ -84,7 +85,7 @@ export default function Direction({ type, values, setValues }) {
           alt='down right arrow'
           handleClick={() => setValues({
             ...values,
-            direction: 'to top left',
+            direction: type === 'linear' ? 'to top left' : 'right bottom',
           })} />
       </div>
     </section>

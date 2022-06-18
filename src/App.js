@@ -14,16 +14,30 @@ function App() {
     console.log(values)
   }, [values]) */
 
-  const gradientType = `${values.gradType}-gradient(${values.direction},${values.firstColor}, ${values.secondColor})`
+  let gradientCode = ''
+
+  const gradientType = () => {
+    if(values.gradType === 'linear'){ 
+      gradientCode = `${values.gradType}-gradient(${values.direction},${values.firstColor}, ${values.secondColor})`;
+      return gradientCode;
+    } else if (values.gradType === 'radial' && values.direction === 'ellipse at center'){
+      gradientCode = `${values.gradType}-gradient(${values.direction}, ${values.firstColor}, ${values.secondColor})`;
+      return gradientCode;
+    } else {
+      gradientCode = `${values.gradType}-gradient(circle at ${values.direction}, ${values.firstColor}, ${values.secondColor})`;
+      return gradientCode;
+    }
+  }
+
   const styles = { 
     gridArea: 'gradient',
     height: '100vh',
-    background: gradientType
+    background: gradientType()
   }  
 
   return (
     <div className='app'>
-      <Sidebar values={values} setValues={setValues}/>
+      <Sidebar values={values} setValues={setValues}></Sidebar>
 
       <div style={styles}/>
     </div>

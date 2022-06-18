@@ -52,7 +52,7 @@ function App() {
 
   return (
     <div className='app'>
-      <Sidebar values={values} setValues={setValues}/>
+      <Sidebar values={values} setValues={setValues} gradientCode={gradientCode}/>
 
       <div style={styles}/>
     </div>

@@ -6,14 +6,14 @@ import Footer from '../Footer/Footer';
 import { randomColor, hexToRGB } from '../../utils/colors';
 import GetButton from '../GetButton/GetButton';
 
-export default function Sidebar({values, setValues}) {
+export default function Sidebar({values, setValues, gradientCode}) {
   const [type, setType] = useState('linear'); 
   const [color1, setColor1] = useState(''); 
   const [color2, setColor2] = useState('');
   
   const randomizeColors = () => {
-    setColor1(randomColor());
-    setColor2(randomColor());
+    setColor1(randomColor().toUpperCase());
+    setColor2(randomColor().toUpperCase());
   };
 
   useEffect(() => {
@@ -29,8 +29,14 @@ export default function Sidebar({values, setValues}) {
       }))
     };
 
-    handleUpdateColors(color1, color2)
+    handleUpdateColors(color1, color2);
   }, [color1, color2, setValues]);
+
+  const fullGradientCode = `
+  background: ${color1};
+  background: -webkit-${gradientCode};
+  background: -moz-${gradientCode};
+  background: ${gradientCode};`;
 
   return (
     <section className={styles.sidebar}>
@@ -96,7 +102,7 @@ export default function Sidebar({values, setValues}) {
 
       </div>
 
-      <GetButton text='Get CSS'/>
+      <GetButton text='Get CSS' handleClick={() => navigator.clipboard.writeText(fullGradientCode)} />
       <GetButton text='Get Share Link' otherClass={styles.share}/>
 
       <Footer />

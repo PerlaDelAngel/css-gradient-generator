@@ -29,6 +29,8 @@ export const radialToLinear = (direction) => {
     return 'to bottom left';
   } else if (direction === 'left center') {
     return 'to right';
+  } else if (direction === 'ellipse at center') {
+    return 'to bottom right';
   } else if (direction === 'right center') {
     return 'to left';
   } else if (direction === 'left bottom') {

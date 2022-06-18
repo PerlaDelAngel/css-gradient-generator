@@ -21,11 +21,15 @@ export default function Sidebar({values, setValues}) {
   }, []);
 
   useEffect(() => {
-    setValues({
-      ...values,
-      firstColor: color1,
-      secondColor: color2
-    })
+    const handleUpdateColors  = (data1, data2) => {
+      setValues(prevValues => ({
+        ...prevValues,
+        firstColor: data1,
+        secondColor: data2
+      }))
+    };
+
+    handleUpdateColors(color1, color2)
   }, [color1, color2, setValues]);
 
   return (

@@ -20,18 +20,17 @@ function App() {
 
   useEffect(() => {
     if(values.gradType === 'radial'){
-      const radialV = linearToRadial(values.direction)
-      handleUpdateDir(radialV)
+      const radialV = linearToRadial(values.direction);
+      handleUpdateDir(radialV);
     };
 
     if(values.gradType === 'linear'){
-      const linearV = radialToLinear(values.direction)
-      handleUpdateDir(linearV)
+      const linearV = radialToLinear(values.direction);
+      handleUpdateDir(linearV);
     };
   }, [values.gradType, values.direction]);
 
   let gradientCode = '';
-
   const gradientType = () => {
     if(values.gradType === 'linear'){ 
       gradientCode = `${values.gradType}-gradient(${values.direction}, ${values.firstColor}, ${values.secondColor})`;
@@ -43,17 +42,17 @@ function App() {
       gradientCode = `${values.gradType}-gradient(circle at ${values.direction}, ${values.firstColor}, ${values.secondColor})`;
       return gradientCode;
     }
-  }
+  };
 
   const styles = { 
     gridArea: 'gradient',
     height: '100vh',
     background: gradientType()
-  }  
+  };
 
   return (
     <div className='app'>
-      <Sidebar values={values} setValues={setValues}></Sidebar>
+      <Sidebar values={values} setValues={setValues}/>
 
       <div style={styles}/>
     </div>

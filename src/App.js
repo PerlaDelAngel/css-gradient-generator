@@ -11,21 +11,24 @@ function App() {
     secondColor: ''
   });
 
+  const handleUpdateDir  = (data) => {
+      setValues(prevValues => ({
+        ...prevValues,
+        direction: data
+      }))
+  };
+
   useEffect(() => {
     if(values.gradType === 'radial'){
-      setValues({
-        ...values,
-        direction: linearToRadial(values)
-      })
+      const radialV = linearToRadial(values.direction)
+      handleUpdateDir(radialV)
     };
 
     if(values.gradType === 'linear'){
-      setValues({
-        ...values,
-        direction: radialToLinear(values)
-      })
+      const linearV = radialToLinear(values.direction)
+      handleUpdateDir(linearV)
     };
-  }, [values.gradType])
+  }, [values.gradType, values.direction]);
 
   let gradientCode = '';
 

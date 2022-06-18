@@ -2,9 +2,57 @@
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: 35% 65%;
+  grid-template-columns: 25% 75%;
   grid-template-rows: auto;
   grid-template-areas: 
     'sidebar gradient'
   ;
+}
+
+@media (max-width: 1024px) {
+  .app{
+    grid-template-columns: 30% 70%;
+  }
+}
+
+@media (max-width: 992px) {
+  .app{
+    grid-template-columns: 35% 65%;
+  }
+}
+
+@media (max-width: 768px) {
+  .app{
+    grid-template-columns: 45% 55%;
+  }
+}
+
+@media (max-width: 600px) {
+  .app{
+    grid-template-columns: 55% 45%;
+  }
+}
+
+@media (max-width: 500px) {
+  .app{
+    grid-template-columns: 64% 36%;
+  }
+}
+
+@media (max-width:425px) {
+  .app{
+    grid-template-columns: 70% 30%;
+    grid-template-rows: auto;
+  }
+}
+
+@media (max-width: 375px) {
+  .app{
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-template-areas: 
+      'sidebar'
+      'gradient'
+    ;
+  }
 }

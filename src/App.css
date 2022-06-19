@@ -9,6 +9,11 @@
   ;
 }
 
+.gradient {
+  grid-area: gradient;
+  height: 100%;
+}
+
 @media (max-width: 1024px) {
   .app{
     grid-template-columns: 30% 70%;

@@ -1,5 +1,5 @@
 const styles = {
-  fontSize: '.8125rem',
+  fontSize: '.9rem',
   fontWeight: '500',
   lineHeight: '1.1875rem',
   position: 'relative',

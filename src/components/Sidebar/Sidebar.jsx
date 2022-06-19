@@ -9,8 +9,8 @@ import { apiEndpoint } from '../../utils/api';
 
 export default function Sidebar({values, setValues, gradientCode, handleUpdate}) {
   const [type, setType] = useState('linear'); 
-  const [color1, setColor1] = useState(''); 
-  const [color2, setColor2] = useState('');
+  const [color1, setColor1] = useState(values.firstColor); 
+  const [color2, setColor2] = useState(values.secondColor);
   const [save, setSave] = useState(false);
   const [name, setName] = useState('');
 
@@ -33,24 +33,20 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
   }
   
   const randomizeColors = () => {
-    setColor1(randomColor().toUpperCase());
-    setColor2(randomColor().toUpperCase());
+    setColor1(randomColor());
+    setColor2(randomColor());
   };
 
   useEffect(() => {
-    randomizeColors();
-  }, []);
-
-  useEffect(() => {
-    const handleUpdateColors  = (data1, data2) => {
+    const handleUpdateColors  = () => {
       setValues(prevValues => ({
         ...prevValues,
-        firstColor: data1,
-        secondColor: data2
+        firstColor: color1,
+        secondColor: color2
       }))
     };
 
-    handleUpdateColors(color1, color2);
+    handleUpdateColors();
   }, [color1, color2, setValues]);
 
   const fullGradientCode = `
@@ -58,6 +54,16 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
   background: -webkit-${gradientCode};
   background: -moz-${gradientCode};
   background: ${gradientCode};`;
+
+  const getLink = () => {
+    const link = new URL(window.location.href);
+    link.searchParams.append('gradType', values.gradType);
+    link.searchParams.append('direction', values.direction);
+    link.searchParams.append('firstColor', values.firstColor);
+    link.searchParams.append('secondColor', values.secondColor);
+
+    navigator.clipboard.writeText(link);
+  };
 
   return (
     <section className={styles.sidebar}>
@@ -122,8 +128,7 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
 
       </div>
 
-      <GetButton 
-        text='Get CSS' 
+      <GetButton text='Get CSS' 
         handleClick={(e) => {
           navigator.clipboard.writeText(fullGradientCode);
           e.target.innerHTML = 'Yay! Copied to Clipboard!';
@@ -132,25 +137,33 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
           }, 1000);
         }} />
 
-      {save === true ? 
-        <div className={styles.name}> 
+      <GetButton text='Get Share Link' otherClass={styles.share}
+        handleClick={(e) => {
+          getLink()
+          e.target.innerHTML = 'Yay! Copied to Clipboard!';
+          setTimeout(function(){
+            e.target.innerHTML = 'Get Share Link';
+          }, 1000);
+        }}
+      />
+
+      {save === true ?
+        <div className={styles.name}>
           <label htmlFor='name'>Insert your name:</label>
-          <input type='text' name='name' onChange={e => setName(e.target.value)} className={styles.input}/>
-          <GetButton 
-            text='Save' 
-            otherClass={styles.save} 
+          <input type='text' name='name' onChange={e => setName(e.target.value)} className={styles.input} />
+          <GetButton
+            text='Save'
+            otherClass={styles.save}
             handleClick={() => {
               saveGradient();
-            }}/>
+            }} />
         </div> :
-        <GetButton 
-          text='Save this gradient' 
-          otherClass={styles.save} 
+        <GetButton
+          text='Save this gradient'
+          otherClass={styles.save}
           handleClick={() => setSave(true)}
         />
       }
-
-      {/* <GetButton text='Get Share Link' otherClass={styles.share}/> */}
 
       <Footer />
     </section>

@@ -13,9 +13,11 @@ function App() {
     secondColor: ''
   });
 
-  /* useEffect(() => {
-    console.log(values)
-  }, [values]) */
+  const [update, setUpdate] = useState(0);
+
+  const handleUpdate = () => {
+    setUpdate(update +1)
+  };
 
   const handleUpdateDir  = (data) => {
       setValues(prevValues => ({
@@ -45,13 +47,17 @@ function App() {
 
   return (
     <div className='app'>
-      <Sidebar values={values} setValues={setValues} gradientCode={gradientCode}/>
+      <Sidebar 
+        values={values} 
+        setValues={setValues} 
+        gradientCode={gradientCode}
+        handleUpdate={handleUpdate} />
 
       <section className='gradient'>
         <div style={styles}>
           <p className='scroll'>↓ Scroll for more ↓</p>
         </div>
-        <Gradients className="gradients"/>
+        <Gradients className="gradients" update={update}/>
       </section>
       
     </div>

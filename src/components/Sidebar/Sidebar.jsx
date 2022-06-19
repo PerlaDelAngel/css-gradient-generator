@@ -5,12 +5,24 @@ import Direction from '../Direction/Direction';
 import Footer from '../Footer/Footer';
 import { randomColor, hexToRGB } from '../../utils/colors';
 import GetButton from '../GetButton/GetButton';
-import { saveGradient } from '../../utils/api';
+import { apiEndpoint } from '../../utils/api';
 
-export default function Sidebar({values, setValues, gradientCode}) {
+export default function Sidebar({values, setValues, gradientCode, handleUpdate}) {
   const [type, setType] = useState('linear'); 
   const [color1, setColor1] = useState(''); 
   const [color2, setColor2] = useState('');
+
+  const saveGradient = (gradientData) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(gradientData)
+    };
+    fetch(apiEndpoint, requestOptions)
+      .then(response => response.json())
+      .then(() => handleUpdate())
+      .catch(response => console.log(response))
+  }
   
   const randomizeColors = () => {
     setColor1(randomColor().toUpperCase());
@@ -103,14 +115,22 @@ export default function Sidebar({values, setValues, gradientCode}) {
 
       </div>
 
-      <GetButton text='Get CSS' handleClick={(e) => {
-        navigator.clipboard.writeText(fullGradientCode);
-        e.target.innerHTML = 'Yay! Copied to Clipboard!';
-        setTimeout(function(){
-          e.target.innerHTML = 'Get CSS';
-        }, 1000);
-      }} />
-      <GetButton text='Save Gradient' otherClass={styles.save} handleClick={() => saveGradient(values)}/>
+      <GetButton 
+        text='Get CSS' 
+        handleClick={(e) => {
+          navigator.clipboard.writeText(fullGradientCode);
+          e.target.innerHTML = 'Yay! Copied to Clipboard!';
+          setTimeout(function(){
+            e.target.innerHTML = 'Get CSS';
+          }, 1000);
+        }} />
+
+      <GetButton 
+        text='Save Gradient' 
+        otherClass={styles.save} 
+        handleClick={() => {
+          saveGradient(values);
+        }}/>
       {/* <GetButton text='Get Share Link' otherClass={styles.share}/> */}
 
       <Footer />

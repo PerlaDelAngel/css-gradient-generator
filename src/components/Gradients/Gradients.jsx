@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { apiEndpoint } from "../../utils/api";
 import SavedGrad from "../SavedGrad/SavedGrad";
 
-export default function Gradients() {
+export default function Gradients({update}) {
   const [gradients, setGradients] = useState(null);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function Gradients() {
         setGradients(savedGrad)
       })
       .catch(res => console.log(res))
-  }, [])
+  }, [update])
 
   const containerStyles = {
     display: 'flex',

@@ -48,7 +48,9 @@ function App() {
       <Sidebar values={values} setValues={setValues} gradientCode={gradientCode}/>
 
       <section className='gradient'>
-        <div style={styles}/>
+        <div style={styles}>
+          <p className='scroll'>↓ Scroll for more ↓</p>
+        </div>
         <Gradients className="gradients"/>
       </section>
       

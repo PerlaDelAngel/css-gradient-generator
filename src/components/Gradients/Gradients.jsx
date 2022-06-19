@@ -19,7 +19,8 @@ export default function Gradients() {
   const containerStyles = {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    margin: '1rem 2rem'
   }
 
   return (

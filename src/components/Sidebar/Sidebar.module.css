@@ -67,6 +67,12 @@
   margin-bottom: 2.5em;
 }
 
+.save{
+  margin: 1em 0 5em;
+  background-color: #3d4853;
+  color: white;
+}
+
 .share{
   margin: 1em 0 5em;
 }

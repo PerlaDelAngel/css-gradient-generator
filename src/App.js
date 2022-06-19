@@ -11,6 +11,11 @@ function App() {
     secondColor: ''
   });
 
+  /* useEffect(() => {
+    console.log(values)
+  }, [values]) */
+  
+
   const handleUpdateDir  = (data) => {
       setValues(prevValues => ({
         ...prevValues,

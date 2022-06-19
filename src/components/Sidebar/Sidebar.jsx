@@ -5,6 +5,7 @@ import Direction from '../Direction/Direction';
 import Footer from '../Footer/Footer';
 import { randomColor, hexToRGB } from '../../utils/colors';
 import GetButton from '../GetButton/GetButton';
+import { saveGradient } from '../../utils/api';
 
 export default function Sidebar({values, setValues, gradientCode}) {
   const [type, setType] = useState('linear'); 
@@ -109,7 +110,8 @@ export default function Sidebar({values, setValues, gradientCode}) {
           e.target.innerHTML = 'Get CSS';
         }, 1000);
       }} />
-      <GetButton text='Get Share Link' otherClass={styles.share}/>
+      <GetButton text='Save Gradient' otherClass={styles.save} handleClick={() => saveGradient(values)}/>
+      {/* <GetButton text='Get Share Link' otherClass={styles.share}/> */}
 
       <Footer />
     </section>

@@ -4,10 +4,19 @@
   border-radius: 8px;
   border: 2px solid #f1f4f8;
   padding: 1rem;
+  font-size: 0.9rem;
 }
 
 .text{
   margin-top: 0.5rem;
   margin-bottom: 0.2rem;
-  font-size: 0.9rem;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.code{
+  margin: 0;
+  font-weight: bold;
 }

@@ -11,16 +11,24 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
   const [type, setType] = useState('linear'); 
   const [color1, setColor1] = useState(''); 
   const [color2, setColor2] = useState('');
+  const [save, setSave] = useState(false);
+  const [name, setName] = useState('');
 
-  const saveGradient = (gradientData) => {
+  const saveGradient = () => {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(gradientData)
+      body: JSON.stringify({
+        ...values,
+        username: name
+      })
     };
     fetch(apiEndpoint, requestOptions)
       .then(response => response.json())
-      .then(() => handleUpdate())
+      .then(() => {
+        handleUpdate();
+        setSave(false)
+      })
       .catch(response => console.log(response))
   }
   
@@ -125,12 +133,25 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
           }, 1000);
         }} />
 
-      <GetButton 
-        text='Save Gradient' 
-        otherClass={styles.save} 
-        handleClick={() => {
-          saveGradient(values);
-        }}/>
+      
+
+      {save === true ? 
+        <> 
+          <label htmlFor='name'>Insert your name:</label>
+          <input type='text' name='name' onChange={e => setName(e.target.value)} />
+          <GetButton 
+            text='Save' 
+            otherClass={styles.save} 
+            handleClick={() => {
+              saveGradient();
+            }}/>
+        </> :
+        <GetButton //despues de guardarlo tiene que volver a settear a false
+          text='Save this gradient' 
+          handleClick={() => setSave(true)}
+        />
+      }
+
       {/* <GetButton text='Get Share Link' otherClass={styles.share}/> */}
 
       <Footer />

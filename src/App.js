@@ -4,14 +4,27 @@ import Sidebar from './components/Sidebar/Sidebar';
 import { linearToRadial, radialToLinear } from './utils/changeDirection';
 import { gradientType } from './utils/gradientType';
 import Gradients from './components/Gradients/Gradients';
+import { randomColor } from './utils/colors';
 
 function App() {
-  const [values, setValues] = useState({
-    gradType: 'linear',
-    direction: 'to bottom right',
-    firstColor: '',
-    secondColor: ''
-  });
+  let initialValues = {};
+
+  if(window.location.href.includes('?')){
+    const link = new URLSearchParams(window.location.search);
+    const entries = link.entries();
+    for(const [key, value] of entries) { 
+      initialValues[key] = value;
+    };
+  } else {
+    initialValues = {
+      gradType: 'linear',
+      direction: 'to bottom right',
+      firstColor: randomColor(),
+      secondColor: randomColor()
+    };
+  };
+  
+  const [values, setValues] = useState(initialValues);
 
   const [update, setUpdate] = useState(0);
 

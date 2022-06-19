@@ -59,6 +59,18 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
   background: -moz-${gradientCode};
   background: ${gradientCode};`;
 
+  const getLink = () => {
+    const link = new URL(window.location.href);
+    link.searchParams.append('gt', values.gradType);
+    link.searchParams.append('gd', values.direction);
+    link.searchParams.append('c1', values.firstColor);
+    link.searchParams.append('c2', values.secondColor);
+
+    navigator.clipboard.writeText(link);
+  }
+
+  getLink()
+
   return (
     <section className={styles.sidebar}>
       <h1 className={styles.title}>Css Gradient Generator</h1>
@@ -122,8 +134,7 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
 
       </div>
 
-      <GetButton 
-        text='Get CSS' 
+      <GetButton text='Get CSS' 
         handleClick={(e) => {
           navigator.clipboard.writeText(fullGradientCode);
           e.target.innerHTML = 'Yay! Copied to Clipboard!';
@@ -132,25 +143,33 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
           }, 1000);
         }} />
 
-      {save === true ? 
-        <div className={styles.name}> 
+      <GetButton text='Get Share Link' otherClass={styles.share}
+        handleClick={(e) => {
+          getLink()
+          e.target.innerHTML = 'Yay! Copied to Clipboard!';
+          setTimeout(function(){
+            e.target.innerHTML = 'Get Share Link';
+          }, 1000);
+        }}
+      />
+
+      {save === true ?
+        <div className={styles.name}>
           <label htmlFor='name'>Insert your name:</label>
-          <input type='text' name='name' onChange={e => setName(e.target.value)} className={styles.input}/>
-          <GetButton 
-            text='Save' 
-            otherClass={styles.save} 
+          <input type='text' name='name' onChange={e => setName(e.target.value)} className={styles.input} />
+          <GetButton
+            text='Save'
+            otherClass={styles.save}
             handleClick={() => {
               saveGradient();
-            }}/>
+            }} />
         </div> :
-        <GetButton 
-          text='Save this gradient' 
-          otherClass={styles.save} 
+        <GetButton
+          text='Save this gradient'
+          otherClass={styles.save}
           handleClick={() => setSave(true)}
         />
       }
-
-      {/* <GetButton text='Get Share Link' otherClass={styles.share}/> */}
 
       <Footer />
     </section>

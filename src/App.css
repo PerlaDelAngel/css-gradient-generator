@@ -9,6 +9,23 @@
   ;
 }
 
+.gradient{
+  grid-area: gradient;
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.scroll{
+  color: rgba(255,255,255,.5);
+  font-weight: 500;
+  font-size: 1rem;
+  margin: 0 0.8rem 0.5rem 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 @media (max-width: 1024px) {
   .app{
     grid-template-columns: 30% 70%;

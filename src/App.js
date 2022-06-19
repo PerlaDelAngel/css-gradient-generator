@@ -2,6 +2,8 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 import { linearToRadial, radialToLinear } from './utils/changeDirection';
+import { gradientType } from './utils/gradientType';
+import Gradients from './components/Gradients/Gradients';
 
 function App() {
   const [values, setValues] = useState({
@@ -10,6 +12,12 @@ function App() {
     firstColor: '',
     secondColor: ''
   });
+
+  const [update, setUpdate] = useState(0);
+
+  const handleUpdate = () => {
+    setUpdate(update +1)
+  };
 
   const handleUpdateDir  = (data) => {
       setValues(prevValues => ({
@@ -30,31 +38,28 @@ function App() {
     };
   }, [values.gradType, values.direction]);
 
-  let gradientCode = '';
-  const gradientType = () => {
-    if(values.gradType === 'linear'){ 
-      gradientCode = `${values.gradType}-gradient(${values.direction}, ${values.firstColor}, ${values.secondColor})`;
-      return gradientCode;
-    } else if (values.gradType === 'radial' && values.direction === 'ellipse at center'){
-      gradientCode = `${values.gradType}-gradient(${values.direction}, ${values.firstColor}, ${values.secondColor})`;
-      return gradientCode;
-    } else {
-      gradientCode = `${values.gradType}-gradient(circle at ${values.direction}, ${values.firstColor}, ${values.secondColor})`;
-      return gradientCode;
-    }
-  };
+  const gradientCode = gradientType(values);
 
-  const styles = { 
-    gridArea: 'gradient',
+  const styles = {
     height: '100vh',
-    background: gradientType()
+    background: gradientCode
   };
 
   return (
     <div className='app'>
-      <Sidebar values={values} setValues={setValues} gradientCode={gradientCode}/>
+      <Sidebar 
+        values={values} 
+        setValues={setValues} 
+        gradientCode={gradientCode}
+        handleUpdate={handleUpdate} />
 
-      <div style={styles}/>
+      <section className='gradient'>
+        <div style={styles}>
+          <p className='scroll'>↓ Scroll for more ↓</p>
+        </div>
+        <Gradients className="gradients" update={update}/>
+      </section>
+      
     </div>
   );
 }

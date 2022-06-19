@@ -5,11 +5,32 @@ import Direction from '../Direction/Direction';
 import Footer from '../Footer/Footer';
 import { randomColor, hexToRGB } from '../../utils/colors';
 import GetButton from '../GetButton/GetButton';
+import { apiEndpoint } from '../../utils/api';
 
-export default function Sidebar({values, setValues, gradientCode}) {
+export default function Sidebar({values, setValues, gradientCode, handleUpdate}) {
   const [type, setType] = useState('linear'); 
   const [color1, setColor1] = useState(''); 
   const [color2, setColor2] = useState('');
+  const [save, setSave] = useState(false);
+  const [name, setName] = useState('');
+
+  const saveGradient = () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ...values,
+        username: name
+      })
+    };
+    fetch(apiEndpoint, requestOptions)
+      .then(response => response.json())
+      .then(() => {
+        handleUpdate();
+        setSave(false)
+      })
+      .catch(response => console.log(response))
+  }
   
   const randomizeColors = () => {
     setColor1(randomColor().toUpperCase());
@@ -41,7 +62,6 @@ export default function Sidebar({values, setValues, gradientCode}) {
   return (
     <section className={styles.sidebar}>
       <h1 className={styles.title}>Css Gradient Generator</h1>
-
 
       <p className={styles.subtitles}>Style</p>
       <div className={styles.type}>
@@ -102,14 +122,35 @@ export default function Sidebar({values, setValues, gradientCode}) {
 
       </div>
 
-      <GetButton text='Get CSS' handleClick={(e) => {
-        navigator.clipboard.writeText(fullGradientCode);
-        e.target.innerHTML = 'Yay! Copied to Clipboard!';
-        setTimeout(function(){
-          e.target.innerHTML = 'Get CSS';
-        }, 1000);
-      }} />
-      <GetButton text='Get Share Link' otherClass={styles.share}/>
+      <GetButton 
+        text='Get CSS' 
+        handleClick={(e) => {
+          navigator.clipboard.writeText(fullGradientCode);
+          e.target.innerHTML = 'Yay! Copied to Clipboard!';
+          setTimeout(function(){
+            e.target.innerHTML = 'Get CSS';
+          }, 1000);
+        }} />
+
+      {save === true ? 
+        <div className={styles.name}> 
+          <label htmlFor='name'>Insert your name:</label>
+          <input type='text' name='name' onChange={e => setName(e.target.value)} className={styles.input}/>
+          <GetButton 
+            text='Save' 
+            otherClass={styles.save} 
+            handleClick={() => {
+              saveGradient();
+            }}/>
+        </div> :
+        <GetButton 
+          text='Save this gradient' 
+          otherClass={styles.save} 
+          handleClick={() => setSave(true)}
+        />
+      }
+
+      {/* <GetButton text='Get Share Link' otherClass={styles.share}/> */}
 
       <Footer />
     </section>

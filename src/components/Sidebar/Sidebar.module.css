@@ -67,6 +67,26 @@
   margin-bottom: 2.5em;
 }
 
+.save{
+  margin: 1em 0 2em;
+  background-color: #3d4853;
+  color: white;
+}
+
 .share{
   margin: 1em 0 5em;
+}
+
+.name{
+  text-align: center;
+  padding: 1rem 0 0.3rem 0;
+  font-size: 0.9rem;
+}
+
+.input{
+  border: 1.5px solid #3d4853;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0.4rem;
+  font-family: 'Poppins', sans-serif;
 }

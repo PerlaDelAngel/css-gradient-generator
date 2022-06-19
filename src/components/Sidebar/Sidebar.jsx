@@ -63,7 +63,6 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
     <section className={styles.sidebar}>
       <h1 className={styles.title}>Css Gradient Generator</h1>
 
-
       <p className={styles.subtitles}>Style</p>
       <div className={styles.type}>
         <Button text='Linear' handleClick={() => {
@@ -133,21 +132,20 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
           }, 1000);
         }} />
 
-      
-
       {save === true ? 
-        <> 
+        <div className={styles.name}> 
           <label htmlFor='name'>Insert your name:</label>
-          <input type='text' name='name' onChange={e => setName(e.target.value)} />
+          <input type='text' name='name' onChange={e => setName(e.target.value)} className={styles.input}/>
           <GetButton 
             text='Save' 
             otherClass={styles.save} 
             handleClick={() => {
               saveGradient();
             }}/>
-        </> :
-        <GetButton //despues de guardarlo tiene que volver a settear a false
+        </div> :
+        <GetButton 
           text='Save this gradient' 
+          otherClass={styles.save} 
           handleClick={() => setSave(true)}
         />
       }

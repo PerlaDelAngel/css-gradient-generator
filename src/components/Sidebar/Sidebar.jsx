@@ -6,14 +6,14 @@ import Footer from '../Footer/Footer';
 import { randomColor, hexToRGB } from '../../utils/colors';
 import GetButton from '../GetButton/GetButton';
 
-export default function Sidebar({values, setValues}) {
+export default function Sidebar({values, setValues, gradientCode}) {
   const [type, setType] = useState('linear'); 
   const [color1, setColor1] = useState(''); 
   const [color2, setColor2] = useState('');
   
   const randomizeColors = () => {
-    setColor1(randomColor());
-    setColor2(randomColor());
+    setColor1(randomColor().toUpperCase());
+    setColor2(randomColor().toUpperCase());
   };
 
   useEffect(() => {
@@ -21,12 +21,22 @@ export default function Sidebar({values, setValues}) {
   }, []);
 
   useEffect(() => {
-    setValues({
-      ...values,
-      firstColor: color1,
-      secondColor: color2
-    })
+    const handleUpdateColors  = (data1, data2) => {
+      setValues(prevValues => ({
+        ...prevValues,
+        firstColor: data1,
+        secondColor: data2
+      }))
+    };
+
+    handleUpdateColors(color1, color2);
   }, [color1, color2, setValues]);
+
+  const fullGradientCode = `
+  background: ${color1};
+  background: -webkit-${gradientCode};
+  background: -moz-${gradientCode};
+  background: ${gradientCode};`;
 
   return (
     <section className={styles.sidebar}>
@@ -92,7 +102,13 @@ export default function Sidebar({values, setValues}) {
 
       </div>
 
-      <GetButton text='Get CSS'/>
+      <GetButton text='Get CSS' handleClick={(e) => {
+        navigator.clipboard.writeText(fullGradientCode);
+        e.target.innerHTML = 'Yay! Copied to Clipboard!';
+        setTimeout(function(){
+          e.target.innerHTML = 'Get CSS';
+        }, 1000);
+      }} />
       <GetButton text='Get Share Link' otherClass={styles.share}/>
 
       <Footer />

@@ -2,15 +2,16 @@ const styles = {
   fontSize: '.8125rem',
   fontWeight: '500',
   lineHeight: '1.1875rem',
-  position: 'fixed',
+  position: 'relative',
   display: 'block',
-  width: '35%',
+  width: '100%',
   bottom: '0',
   left: '0',
-  padding: '30px 32px',
+  padding: '10% 10% 0 10%',
   backgroundColor: '#fff',
   zIndex: '11', 
-  color: '#3d4853'
+  color: '#3d4853',
+  textAlign: 'center'
 }
 
 export default function Footer() {

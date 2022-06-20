@@ -7,9 +7,9 @@ import { randomColor, hexToRGB } from '../../utils/colors';
 import GetButton from '../GetButton/GetButton';
 import { apiEndpoint } from '../../utils/api';
 
-export default function Sidebar({values, setValues, gradientCode, handleUpdate}) {
-  const [type, setType] = useState(values.gradType); 
-  const [color1, setColor1] = useState(values.firstColor); 
+export default function Sidebar({ values, setValues, gradientCode, handleUpdate }) {
+  const [type, setType] = useState(values.gradType);
+  const [color1, setColor1] = useState(values.firstColor);
   const [color2, setColor2] = useState(values.secondColor);
   const [save, setSave] = useState(false);
   const [name, setName] = useState('');
@@ -21,7 +21,7 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
     })
   };
 
-  const saveGradient = () => { //can I import this? leave it at the first then
+  const saveGradient = () => {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -34,18 +34,18 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
       .then(response => response.json())
       .then(() => {
         handleUpdate();
-        setSave(false)
+        setSave(false);
       })
       .catch(response => console.log(response))
-  }
-  
+  };
+
   const randomizeColors = () => {
     setColor1(randomColor());
     setColor2(randomColor());
   };
 
   useEffect(() => {
-    const handleUpdateColors  = () => {
+    const handleUpdateColors = () => {
       setValues(prevValues => ({
         ...prevValues,
         firstColor: color1,
@@ -56,12 +56,14 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
     handleUpdateColors();
   }, [color1, color2, setValues]);
 
+  //Generates gradient code to copy to clipboard
   const fullGradientCode = `
   background: ${color1};
   background: -webkit-${gradientCode};
   background: -moz-${gradientCode};
   background: ${gradientCode};`;
 
+  //Generates link for 'share link' button
   const getLink = () => {
     const link = new URL(window.location.href);
     link.searchParams.append('gradType', values.gradType);
@@ -79,16 +81,16 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
       <p className={styles.subtitles}>Style</p>
       <div className={styles.type}>
         <Button text='Linear' handleClick={() => {
-          setType('linear'); 
+          setType('linear');
           handleUpdateType('linear');
         }} />
         <Button text='Radial' handleClick={() => {
-          setType('radial'); 
+          setType('radial');
           handleUpdateType('radial');
         }} />
       </div>
 
-      <Direction type={type} values={values} setValues={setValues}/>
+      <Direction type={type} values={values} setValues={setValues} />
 
       <p className={styles.subtitles}>Colors</p>
       <div className={styles.colors}>
@@ -98,33 +100,33 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
         <input type='color' className={styles.color} value={color2}
           onChange={e => setColor2(e.target.value)} />
 
-        <Button text='Random' handleClick={()=> randomizeColors()} />
+        <Button text='Random' handleClick={() => randomizeColors()} />
       </div>
 
       <p className={styles.subtitles}>Output format</p>
       <div className={styles.output}>
         <Button text='Hex' handleClick={() => {
           setValues({
-            ...values, 
+            ...values,
             firstColor: color1,
             secondColor: color2
           });
-        }}/>
+        }} />
 
         <Button text='Rgba' handleClick={() => {
           setValues({
-            ...values, 
+            ...values,
             firstColor: hexToRGB(color1),
             secondColor: hexToRGB(color2)
           });
-        }}/>
+        }} />
       </div>
 
-      <GetButton text='Get CSS' 
+      <GetButton text='Get CSS'
         handleClick={(e) => {
           navigator.clipboard.writeText(fullGradientCode);
           e.target.innerHTML = 'Yay! Copied to Clipboard!';
-          setTimeout(function(){
+          setTimeout(function () {
             e.target.innerHTML = 'Get CSS';
           }, 1000);
         }} />
@@ -133,7 +135,7 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
         handleClick={(e) => {
           getLink();
           e.target.innerHTML = 'Yay! Copied to Clipboard!';
-          setTimeout(function(){
+          setTimeout(function () {
             e.target.innerHTML = 'Get Share Link';
           }, 1000);
         }}

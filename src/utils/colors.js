@@ -3,7 +3,6 @@ export function randomColor() {
   return '#' + randomize;
 };
 
-//ie. #8C2603
 export function hexToRGB(hex) {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
@@ -11,3 +10,21 @@ export function hexToRGB(hex) {
 
   return "rgb(" + r + ", " + g + ", " + b + ")";
 };
+
+export function RGBToHex(rgb) {
+  const colors = rgb.slice(4, -1);
+  const RGBvalues = colors.split(',')
+
+  let r = (+RGBvalues[0]).toString(16);
+  let g = (+RGBvalues[1]).toString(16);
+  let b = (+RGBvalues[2]).toString(16);
+
+ if (r.length === 1)
+    r = "0" + r;
+  if (g.length === 1)
+    g = "0" + g;
+  if (b.length === 1)
+    b = "0" + b;
+
+  return "#" + r + g + b;
+}

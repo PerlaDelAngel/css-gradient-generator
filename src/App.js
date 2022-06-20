@@ -1,21 +1,20 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
-import { linearToRadial, radialToLinear } from './utils/changeDirection';
-import { gradientType } from './utils/gradientType';
+import { gradientType, linearToRadial, radialToLinear } from './utils/gradientType';
 import Gradients from './components/Gradients/Gradients';
-import { randomColor } from './utils/colors';
+import { randomColor, RGBToHex } from './utils/colors';
 
 function App() {
   let initialValues = {};
 
-  if(window.location.href.includes('?')){
+  if (window.location.href.includes('?')) { //Sets initial values with search params
     const link = new URLSearchParams(window.location.search);
     const entries = link.entries();
-    for(const [key, value] of entries) { 
+    for (const [key, value] of entries) {
       initialValues[key] = value;
-    };
-  } else {
+    }; 
+  } else { //Sets initial values with default values
     initialValues = {
       gradType: 'linear',
       direction: 'to bottom right',
@@ -23,31 +22,34 @@ function App() {
       secondColor: randomColor()
     };
   };
-  
+
+  const colorOne = initialValues.firstColor;
+  const colorTwo = initialValues.secondColor;
+  if(colorOne.includes('rgb')){ //If it receives the colors in rgb, converts it to HEX to render them
+    initialValues.firstColor = RGBToHex(colorOne);
+    initialValues.secondColor = RGBToHex(colorTwo);
+  };
+
   const [values, setValues] = useState(initialValues);
 
-  const [update, setUpdate] = useState(0);
+  const [update, setUpdate] = useState(0); //State to handle when a new gradient is saved
 
   const handleUpdate = () => {
-    setUpdate(update +1)
+    setUpdate(update + 1)
   };
 
-  const handleUpdateDir  = (data) => {
-      setValues(prevValues => ({
-        ...prevValues,
-        direction: data
-      }))
+  const handleUpdateDir = (data) => {
+    setValues(prevValues => ({
+      ...prevValues,
+      direction: data
+    }))
   };
 
-  useEffect(() => {
-    if(values.gradType === 'radial'){
-      const radialV = linearToRadial(values.direction);
-      handleUpdateDir(radialV);
-    };
-
-    if(values.gradType === 'linear'){
-      const linearV = radialToLinear(values.direction);
-      handleUpdateDir(linearV);
+  useEffect(() => { //Changes the direction based on the gradient type
+    if (values.gradType === 'radial') {
+      handleUpdateDir(linearToRadial(values.direction));
+    } else if (values.gradType === 'linear') {
+      handleUpdateDir(radialToLinear(values.direction));
     };
   }, [values.gradType, values.direction]);
 
@@ -60,9 +62,9 @@ function App() {
 
   return (
     <div className='app'>
-      <Sidebar 
-        values={values} 
-        setValues={setValues} 
+      <Sidebar
+        values={values}
+        setValues={setValues}
         gradientCode={gradientCode}
         handleUpdate={handleUpdate} />
 
@@ -70,9 +72,9 @@ function App() {
         <div style={styles}>
           <p className='scroll'>↓ Scroll for more ↓</p>
         </div>
-        <Gradients className="gradients" update={update}/>
+        <Gradients className="gradients" update={update} />
       </section>
-      
+
     </div>
   );
 }

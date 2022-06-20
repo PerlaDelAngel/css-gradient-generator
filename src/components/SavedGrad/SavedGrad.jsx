@@ -1,7 +1,7 @@
 import styles from './SavedGrad.module.css';
 import { gradientType } from '../../utils/gradientType';
 
-export default function SavedGrad({values}) {
+export default function SavedGrad({ values }) {
   const gradientCode = gradientType(values);
 
   const styleGradient = {

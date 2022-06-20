@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { apiEndpoint } from "../../utils/api";
 import SavedGrad from "../SavedGrad/SavedGrad";
 
-export default function Gradients({update}) {
+export default function Gradients({ update }) {
   const [gradients, setGradients] = useState(null);
 
   useEffect(() => {
@@ -25,10 +25,10 @@ export default function Gradients({update}) {
 
   return (
     <>
-      <h2 style={{textAlign: 'center'}}>Previously saved gradients</h2>
+      <h2 style={{ textAlign: 'center' }}>Previously saved gradients</h2>
       <section style={containerStyles}>
-        {gradients?.map((grad) => 
-          <SavedGrad values={grad} key={grad.id}/>
+        {gradients?.map((grad) =>
+          <SavedGrad values={grad} key={grad.id} />
         )}
       </section>
     </>

@@ -8,13 +8,20 @@ import GetButton from '../GetButton/GetButton';
 import { apiEndpoint } from '../../utils/api';
 
 export default function Sidebar({values, setValues, gradientCode, handleUpdate}) {
-  const [type, setType] = useState('linear'); 
+  const [type, setType] = useState(values.gradType); 
   const [color1, setColor1] = useState(values.firstColor); 
   const [color2, setColor2] = useState(values.secondColor);
   const [save, setSave] = useState(false);
   const [name, setName] = useState('');
 
-  const saveGradient = () => {
+  const handleUpdateType = (gtype) => {
+    setValues({
+      ...values,
+      gradType: gtype,
+    })
+  };
+
+  const saveGradient = () => { //can I import this? leave it at the first then
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -72,18 +79,12 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
       <p className={styles.subtitles}>Style</p>
       <div className={styles.type}>
         <Button text='Linear' handleClick={() => {
-          setType('linear');
-          setValues({
-            ...values,
-            gradType: 'linear',
-          })
+          setType('linear'); 
+          handleUpdateType('linear');
         }} />
         <Button text='Radial' handleClick={() => {
-          setType('radial');
-          setValues({
-            ...values,
-            gradType: 'radial',
-          })
+          setType('radial'); 
+          handleUpdateType('radial');
         }} />
       </div>
 
@@ -91,41 +92,32 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
 
       <p className={styles.subtitles}>Colors</p>
       <div className={styles.colors}>
-        <input
-          type='color'
-          className={styles.color}
-          value={color1}
+        <input type='color' className={styles.color} value={color1}
           onChange={e => setColor1(e.target.value)} />
 
-        <input
-          type='color'
-          className={styles.color}
-          value={color2}
+        <input type='color' className={styles.color} value={color2}
           onChange={e => setColor2(e.target.value)} />
 
         <Button text='Random' handleClick={()=> randomizeColors()} />
       </div>
 
-
       <p className={styles.subtitles}>Output format</p>
       <div className={styles.output}>
-
         <Button text='Hex' handleClick={() => {
           setValues({
             ...values, 
             firstColor: color1,
             secondColor: color2
-          })
-          }}/>
+          });
+        }}/>
 
         <Button text='Rgba' handleClick={() => {
           setValues({
             ...values, 
             firstColor: hexToRGB(color1),
             secondColor: hexToRGB(color2)
-          })
-          }}/>
-
+          });
+        }}/>
       </div>
 
       <GetButton text='Get CSS' 
@@ -139,7 +131,7 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
 
       <GetButton text='Get Share Link' otherClass={styles.share}
         handleClick={(e) => {
-          getLink()
+          getLink();
           e.target.innerHTML = 'Yay! Copied to Clipboard!';
           setTimeout(function(){
             e.target.innerHTML = 'Get Share Link';
@@ -151,19 +143,12 @@ export default function Sidebar({values, setValues, gradientCode, handleUpdate})
         <div className={styles.name}>
           <label htmlFor='name'>Insert your name:</label>
           <input type='text' name='name' onChange={e => setName(e.target.value)} className={styles.input} />
-          <GetButton
-            text='Save'
-            otherClass={styles.save}
-            handleClick={() => {
-              saveGradient();
-            }} />
+          <GetButton text='Save' otherClass={styles.save}
+            handleClick={() => saveGradient()} />
         </div> :
-        <GetButton
-          text='Save this gradient'
-          otherClass={styles.save}
+        <GetButton text='Save this gradient' otherClass={styles.save}
           handleClick={() => setSave(true)}
-        />
-      }
+        />}
 
       <Footer />
     </section>

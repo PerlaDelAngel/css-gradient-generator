@@ -37,7 +37,11 @@ With this website you can:
 
 You can find the deployed project [here](https://css-gradient-generator-pda.netlify.app/).
 
-![Screenshot of the project](./src/assets/screenshot.png)
+<div align="center">
+
+  ![Screenshot of the project](./src/assets/screenshot.png)
+
+</div>
 
 ## 4. Author
 

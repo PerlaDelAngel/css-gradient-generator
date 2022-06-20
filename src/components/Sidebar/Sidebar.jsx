@@ -5,38 +5,19 @@ import Direction from '../Direction/Direction';
 import Footer from '../Footer/Footer';
 import { randomColor, hexToRGB } from '../../utils/colors';
 import GetButton from '../GetButton/GetButton';
-import { apiEndpoint } from '../../utils/api';
+import SaveModal from '../SaveModal/SaveModal';
 
 export default function Sidebar({ values, setValues, gradientCode, handleUpdate }) {
   const [type, setType] = useState(values.gradType);
   const [color1, setColor1] = useState(values.firstColor);
   const [color2, setColor2] = useState(values.secondColor);
-  const [save, setSave] = useState(false);
-  const [name, setName] = useState('');
+  const [open, setIsOpen] = useState(false);
 
   const handleUpdateType = (gtype) => {
     setValues({
       ...values,
       gradType: gtype,
     })
-  };
-
-  const saveGradient = () => {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ...values,
-        username: name
-      })
-    };
-    fetch(apiEndpoint, requestOptions)
-      .then(response => response.json())
-      .then(() => {
-        handleUpdate();
-        setSave(false);
-      })
-      .catch(response => console.log(response))
   };
 
   const randomizeColors = () => {
@@ -141,16 +122,9 @@ export default function Sidebar({ values, setValues, gradientCode, handleUpdate 
         }}
       />
 
-      {save === true ?
-        <div className={styles.name}>
-          <label htmlFor='name'>Insert your name:</label>
-          <input type='text' name='name' onChange={e => setName(e.target.value)} className={styles.input} />
-          <GetButton text='Save' otherClass={styles.save}
-            handleClick={() => saveGradient()} />
-        </div> :
-        <GetButton text='Save this gradient' otherClass={styles.save}
-          handleClick={() => setSave(true)}
-        />}
+      <GetButton text='Save this gradient' otherClass={styles.save} handleClick={() => setIsOpen(true)} />
+
+      <SaveModal open={open} onClose={() => setIsOpen(false)} values={values} handleUpdate={handleUpdate}/>
 
       <Footer />
     </section>

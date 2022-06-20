@@ -1,0 +1,10 @@
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 1rem 2rem;
+}
+
+.title{
+  text-align: center;
+}

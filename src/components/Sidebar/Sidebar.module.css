@@ -25,15 +25,15 @@
 
 .type{
   display: flex;
-  gap: 0.8em;
+  gap: 0.9em;
 }
 
 .colors{
-  width: 95%;
+  width: 86%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  column-gap: 0.3em;
+  column-gap: 0.4em;
 }
 
 .color{
@@ -63,7 +63,7 @@
   width: 80%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 0.8em;
+  column-gap: 0.9em;
   margin-bottom: 2.5em;
 }
 
@@ -76,18 +76,4 @@
 
 .share{
   margin-top: 1em;
-}
-
-.name{
-  text-align: center;
-  padding: 1rem 0 0.3rem 0;
-  font-size: 0.9rem;
-}
-
-.input{
-  border: 1.5px solid #3d4853;
-  border-radius: 6px;
-  margin-top: 0.5rem;
-  padding: 0.2rem 0.4rem;
-  font-family: 'Poppins', sans-serif;
 }

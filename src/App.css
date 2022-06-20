@@ -2,7 +2,7 @@
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: 28% 72%;
+  grid-template-columns: 25% 75%;
   grid-template-rows: auto;
   grid-template-areas: 
     'sidebar gradient'

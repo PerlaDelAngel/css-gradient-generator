@@ -9,7 +9,7 @@ const styles = {
   left: '0',
   padding: '10% 10% 0 10%',
   backgroundColor: '#fff',
-  zIndex: '11', 
+  zIndex: '11',
   color: '#3d4853',
   textAlign: 'center'
 }

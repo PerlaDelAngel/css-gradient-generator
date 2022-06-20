@@ -11,6 +11,12 @@ import downRight from '../../assets/Down Right.png';
 import circle from '../../assets/Circle.png';
 
 export default function Direction({ type, values, setValues }) {
+  const updateDir = (dir) => {
+    setValues({
+      ...values,
+      direction: dir,
+    })
+  };
 
   return (
     <section>
@@ -19,74 +25,46 @@ export default function Direction({ type, values, setValues }) {
         <Button
           img={upLeft}
           alt='up left arrow'
-          handleClick={() => setValues({
-            ...values,
-            direction: type === 'linear' ? 'to bottom right' : 'left top',
-          })}
-        />
+          handleClick={() => updateDir(type === 'linear' ? 'to bottom right' : 'left top')} />
 
         <Button
           img={up}
           alt='top arrow'
-          handleClick={() => setValues({
-            ...values,
-            direction: type === 'linear' ? 'to bottom' : 'center top',
-          })} />
+          handleClick={() => updateDir(type === 'linear' ? 'to bottom' : 'center top')} />
 
         <Button
           img={upRight}
           alt='up right arrow'
-          handleClick={() => setValues({
-            ...values,
-            direction: type === 'linear' ? 'to bottom left' : 'right top',
-          })} />
+          handleClick={() => updateDir(type === 'linear' ? 'to bottom left' : 'right top')} />
 
         <Button
           img={left}
           alt='left arrow'
-          handleClick={() => setValues({
-            ...values,
-            direction: type === 'linear' ? 'to right' : 'left center',
-          })} />
+          handleClick={() => updateDir(type === 'linear' ? 'to right' : 'left center')} />
 
         {type === 'radial' ?
-          <Button img={circle} alt='left arrow' handleClick={() => setValues({
-            ...values,
-            direction: 'ellipse at center',
-          })} /> :
+          <Button img={circle} alt='left arrow' handleClick={() => updateDir('ellipse at center')} /> :
           <div />}
 
         <Button
           img={right}
           alt='right arrow'
-          handleClick={() => setValues({
-            ...values,
-            direction: type === 'linear' ? 'to left' : 'right center',
-          })} />
+          handleClick={() => updateDir(type === 'linear' ? 'to left' : 'right center')} />
 
         <Button
           img={downLeft}
           alt='down left arrow'
-          handleClick={() => setValues({
-            ...values,
-            direction: type === 'linear' ? 'to top right' : 'left bottom',
-          })} />
+          handleClick={() => updateDir(type === 'linear' ? 'to top right' : 'left bottom')} />
 
         <Button
           img={down}
           alt='down arrow'
-          handleClick={() => setValues({
-            ...values,
-            direction: type === 'linear' ? 'to top' : 'center bottom',
-          })} />
+          handleClick={() => updateDir(type === 'linear' ? 'to top' : 'center bottom')} />
 
         <Button
           img={downRight}
           alt='down right arrow'
-          handleClick={() => setValues({
-            ...values,
-            direction: type === 'linear' ? 'to top left' : 'right bottom',
-          })} />
+          handleClick={() => updateDir(type === 'linear' ? 'to top left' : 'right bottom')} />
       </div>
     </section>
   )

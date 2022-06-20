@@ -20,3 +20,27 @@
   margin: 0;
   font-weight: bold;
 }
+
+@media (max-width: 992px) {
+  .card{
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .card{
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .card{
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .card{
+    width: fit-content;
+  }
+}

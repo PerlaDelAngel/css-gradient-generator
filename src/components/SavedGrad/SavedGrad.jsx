@@ -15,6 +15,7 @@ export default function SavedGrad({ values }) {
     <article className={styles.card}>
       <div style={styleGradient} />
       <p className={styles.text}><span className={styles.bold}>User:</span> {values.username}.</p>
+      <p className={styles.text}><span className={styles.bold}>Name:</span> {values.gradientName}.</p>
       <p className={styles.code}>Code:</p>
       <p className={styles.text}>background: {gradientCode};</p>
     </article>

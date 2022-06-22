@@ -13,7 +13,7 @@
 
 ## 1. Project description
 
-Website that allows you to create gradient backgrounds for all your web development needs! Developed with React, using this web app you can set the type, direction and colors for your gradient.
+Based on [Stefano Merlo's gradient generator website](https://www.css-gradient.com/). This website allows you to create gradient backgrounds for all your web development needs! Developed with React, using this web app you can set the type, direction and colors for your gradient.
 
 Already have a some colors in mind? Do you want to experiment with your own color combinations? Or do you need some suggestions? We got you covered! Select your favorite colors or let the applications randomize them for you, saving valuable time in your developing process.
 

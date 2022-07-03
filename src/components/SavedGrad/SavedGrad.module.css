@@ -6,6 +6,9 @@
   padding: 1rem;
   font-size: 0.9rem;
 }
+.card:hover{
+  border: 2px solid #dadbdd;
+}
 
 .text{
   margin-top: 0.5rem;

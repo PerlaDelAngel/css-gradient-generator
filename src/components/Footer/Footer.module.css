@@ -1,0 +1,14 @@
+.footer{
+  font-size: .9rem;
+  font-weight: 500;
+  line-height: 1.1875rem;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: 10% 10% 0 10%;
+  background-color: #fff;
+  z-index: 11;
+  color: #3d4853;
+  text-align: center
+}

@@ -20,8 +20,6 @@ export default function Gradients({ update }) {
       .catch(res => console.log(res))
   }, [update])
 
-
-
   return (
     <>
       <h2 className={styles.title}>Previously saved gradients</h2>

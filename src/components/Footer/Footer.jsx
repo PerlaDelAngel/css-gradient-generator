@@ -1,22 +1,8 @@
-const styles = {
-  fontSize: '.9rem',
-  fontWeight: '500',
-  lineHeight: '1.1875rem',
-  position: 'relative',
-  display: 'block',
-  width: '100%',
-  bottom: '0',
-  left: '0',
-  padding: '10% 10% 0 10%',
-  backgroundColor: '#fff',
-  zIndex: '11',
-  color: '#3d4853',
-  textAlign: 'center'
-}
+import styles from './Footer.module.css';
 
 export default function Footer() {
   return (
-    <footer style={styles}>
+    <footer className={styles.footer}>
       Made with ♥ by Perla Del Ángel © 2022
     </footer>
   )

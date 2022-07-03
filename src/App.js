@@ -1,9 +1,12 @@
-import './App.css';
 import { useState, useEffect } from 'react';
-import Sidebar from './components/Sidebar/Sidebar';
+
 import { gradientType, linearToRadial, radialToLinear } from './utils/gradientType';
-import Gradients from './components/Gradients/Gradients';
 import { randomColor, RGBToHex } from './utils/colors';
+
+import './App.css';
+
+import Sidebar from './components/Sidebar/Sidebar';
+import Gradients from './components/Gradients/Gradients';
 
 function App() {
   let initialValues = {};

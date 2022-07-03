@@ -1,11 +1,15 @@
-import styles from './Sidebar.module.css';
-import Button from '../Button/Button';
 import { useState, useEffect } from 'react';
+
+import { randomColor, hexToRGB } from '../../utils/colors';
+
+import Button from '../Button/Button';
 import Direction from '../Direction/Direction';
 import Footer from '../Footer/Footer';
-import { randomColor, hexToRGB } from '../../utils/colors';
 import GetButton from '../GetButton/GetButton';
 import SaveModal from '../SaveModal/SaveModal';
+
+import styles from './Sidebar.module.css';
+
 
 export default function Sidebar({ values, setValues, gradientCode, handleUpdate }) {
   const [type, setType] = useState(values.gradType);

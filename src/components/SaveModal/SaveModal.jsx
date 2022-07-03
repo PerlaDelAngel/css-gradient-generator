@@ -1,8 +1,11 @@
 import ReactDOM from "react-dom";
-import styles from './SaveModal.module.css';
 import { useState } from "react";
-import GetButton from "../GetButton/GetButton";
+
 import { apiEndpoint } from "../../utils/api";
+
+import GetButton from "../GetButton/GetButton";
+
+import styles from './SaveModal.module.css';
 
 export default function SaveModal ({ open, onClose, values, handleUpdate}) {
   const [name, setName] = useState('');

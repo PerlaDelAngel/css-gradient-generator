@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+
 import { apiEndpoint } from "../../utils/api";
+
 import SavedGrad from "../SavedGrad/SavedGrad";
+
 import styles from './Gradients.module.css';
 
 export default function Gradients({ update }) {
@@ -16,8 +19,6 @@ export default function Gradients({ update }) {
       })
       .catch(res => console.log(res))
   }, [update])
-
-
 
   return (
     <>

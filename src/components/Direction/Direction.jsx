@@ -1,5 +1,5 @@
-import styles from './Direction.module.css';
 import Button from '../Button/Button';
+
 import upLeft from '../../assets/Up Left.png';
 import up from '../../assets/Up Arrow.png';
 import upRight from '../../assets/Up Right.png';
@@ -9,6 +9,8 @@ import downLeft from '../../assets/Down Left.png';
 import down from '../../assets/Down Arrow.png';
 import downRight from '../../assets/Down Right.png';
 import circle from '../../assets/Circle.png';
+
+import styles from './Direction.module.css';
 
 export default function Direction({ type, values, setValues }) {
   const updateDir = (dir) => {
